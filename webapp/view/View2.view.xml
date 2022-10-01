@@ -1,0 +1,42 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns= "sap.m" xmlns:f= "sap.ui.layout.form" xmlns:core = "sap.ui.core" xmlns:t = "sap.ui.table"
+          controllerName="emc.hr.payroll.controller.View2">
+
+        <Page title="View 2" showNavButton="true" navButtonPress="onBack">
+        
+                <!-- <Button text="Back" icon ="sap-icon://arrow-left"
+                press="onBack" /> -->
+        <content>    
+            <ObjectHeader intro="{DESCRIPTION}" title="{PRODUCT_ID}" icon="sap-icon://product" number="{PRICE}" numberUnit="{CURRENCY_CODE}"></ObjectHeader>
+            
+            <IconTabBar>
+            <items>
+            <IconTabFilter icon="sap-icon://warning" text="More Info">
+                <core:Fragment fragmentName="emc/hr/payroll/fragments/moreInfo" type= "XML" />
+                <core:Fragment fragmentName="emc.hr.payroll.fragments.supplierInfo" type= "XML" />
+            </IconTabFilter>
+
+            <IconTabFilter iconColor="Positive" icon="sap-icon://supplier" text="supplier" > 
+                <core:Fragment fragmentName="emc/hr/payroll/fragments/supplier" type= "XML" />
+            </IconTabFilter>
+    
+            <IconTabFilter iconColor="Negative" icon="sap-icon://home" text="Cities">
+                <core:Fragment fragmentName="emc/hr/payroll/fragments/cities" type= "XML" />
+            </IconTabFilter>
+            
+            </items>
+            </IconTabBar>
+
+        </content>
+             <footer>
+                <Toolbar>
+                	<ToolbarSpacer ></ToolbarSpacer>
+                    <Button text= "Order" press="onOrder" type="Accept"></Button>
+                    <Button text= "Cancel" type="Reject"></Button>
+                    <Button text= "Edit"></Button>
+                    <Button text= "Delete"></Button>
+                </Toolbar>
+             </footer>
+
+        </Page>
+
+</mvc:View>
