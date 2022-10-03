@@ -2,3 +2,27 @@ specVersion: '2.3'
 metadata:
   name: fiorilikeapp
 type: application
+server:
+  customMiddleware:
+    - name: fiori-tools-proxy
+      afterMiddleware: compression
+      configuration:
+        ignoreCertError: false
+        backend:
+          - path: /sap/opu/odata
+            url:  http://20.97.164.245:50000/
+            client: "100"
+            destination: DS4
+            
+        ui5:
+          path:
+            - /resources
+            - /test-resources
+          url: https://ui5.sap.com
+          version: 1.106.0
+
+    - name: fiori-tools-appreload
+      afterMiddleware: compression
+      configuration:
+        port: 35729
+        path: webapp
