@@ -20,9 +20,9 @@ sap.ui.define([
                     "TAX_TARIF_CODE" : "1 ",
                     "PRICE" : "0",
                     "CURRENCY_CODE" : "USD",
-                    "DIM_UNIT" : "CM"
-
-                }
+                    "DIM_UNIT" : "CM",
+                    "To_Orders": []
+                },
             });
             this.getView().setModel(this.oModel, "viewModel");
         },
@@ -43,13 +43,20 @@ sap.ui.define([
             // Step 2: Get the odata model object
             var oDataModel = that.getView().getModel();
             // Step 3:FIre the read call
+            this.getView().setBusy(true);
             oDataModel.read("/ProductSet('" + sText + "')", {
                 // Step 4: Handle sucess - set data to our local model
+                urlParameters: {
+                    "$expand": "To_Orders"
+                },
                 success: function(data){
+                    that.getView().setBusy(false);
                     that.oModel.setProperty("/productData", data);
+                    that.oModel.setProperty("/productData/To_Orders", data.To_Orders.results);
                 },
                 // Step 5: Error handling
                 error: function(oError){
+                    that.getView().setBusy(false);
                     MessageBox.error(JSON.parse(oError.responseText).error.innererror.errordetails[0].message);
                 }
             });
